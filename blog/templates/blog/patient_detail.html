@@ -1,0 +1,100 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    button.btn.btn-outline-info {
+      background-color: rgb(63, 171, 243);
+      font-weight: 600;
+      transition: 0.5s;
+  }
+  button.btn.btn-outline-info:hover {
+      background-color: rgb(255, 204, 95);
+      color: black;
+  }
+  </style>
+    <article class="media content-section">
+        <img  src="{{ post.author.profile.image.url }}">
+        <div class="media-body">
+            
+            <h2 class="article-title">{{ post.name }}</h2>
+            <h4>Patient's Info</h4>
+
+            <h4>General Details</h4>
+
+            <div> 
+                <table class="table table-hover table-dark">
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Phone Number</td>
+                    <td>{{post.phone_number}}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Aadhar Number</td>
+                    <td>{{post.aadhar_number}}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Gender</td>
+                    <td> {{post.gender | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td>Age</td>
+                    <td>{{post.age | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">4</th>
+                    <td>Symptoms</td>
+                    <td>{{post.symptoms | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">5</th>
+                    <td>Ambulance Required</td>
+                    <td>{{post.ambulance_required| safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">5</th>
+                    <td>Has Covid</td>
+                    <td>{{post.tested| safe}}</td> 
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+
+            
+            <h4>Location Details</h4>
+            <div> 
+                <table class="table table-hover table-dark">
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>City</td>
+                    <td>{{ post.city | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Address</td>
+                    <td>{{ post.address | safe}}</td> 
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+
+            
+            
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form | crispy}}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Registed Covid Bed</button>
+                </div>
+            </form>
+               
+        </div> 
+        
+    </article>
+{% endblock content%}

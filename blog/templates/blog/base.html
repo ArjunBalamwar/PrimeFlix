@@ -1,0 +1,263 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- <script id="gs-sdk" src='//www.buildquickbots.com/botwidget/v3/demo/static/js/sdk.js?v=3' key="2de8d293-c16d-42e5-ab6e-28caf5b424e7" ></script> -->
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../../static/blog/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="../../static/blog/css/font-awesome.css">
+      <link rel="stylesheet" type="text/css" href="../../static/blog/css/templatemo-art-factory.css">
+    <link rel="stylesheet" type="text/css" href="../../static/blog/css/owl-carousel.css">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <!-- <script
+        type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      ></script> -->
+      <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement(
+            { pageLanguage: "en" },
+            "google_translate_element"
+          );
+        }
+      </script>
+            
+        <title>Covid Saathi</title>
+    </head>
+    <body background="#003 !important">
+      <style>
+       
+        .goog-logo-link img {
+display: none;
+}
+    
+    .dropbtn {
+        background-color: rgb(85, 85, 219);
+color: white;
+padding: 16px;
+font-size: 16px;
+border: none;
+transition: all 0.3s;
+padding-left: 23x;
+padding-right: 23px;
+height: 100%;
+margin-top: 0;
+margin-bottom: 0;
+font-size: 20px;
+font-weight: 700;
+line-height: 20px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #f1f1f1;
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+background-color: rgb(252, 188, 49);
+}
+
+.navElements {
+float: left;
+}
+.dropbtn{
+padding-left: 23x;
+padding-right: 23px;
+height: 100%;
+margin-top: 0;
+margin-bottom: 0;
+font-size: 20px;
+font-weight: 700;
+line-height: 20px;
+}
+</style>
+      <header class="header-area header-sticky">
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">PrimeFlix</a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a></li>
+                            <!-- <li class="scroll-to-section"><a href="#frequently-question">Frequently Questions</a></li> -->
+                            {% if user.is_authenticated %}
+                            
+                            <!-- <li class="submenu">
+                                <li class="scroll-to-section"><a href="javascript:;">Activities</a></li>
+                              <ul> -->
+                                <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a></li>
+                                {% if user.is_superuser %}
+                                    <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'post-create' %}">Add Post</a></li>
+                                {% endif %}
+                              <!-- </ul>
+                            </li> -->
+                              <!-- <li class="scroll-to-section"><a  href="{% url 'dash-view' %}">Dashboard</a></li>
+                              <li class="scroll-to-section"><a  href="{% url 'post-create' %}">Enter Yourself</a></li> -->
+                              <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
+                            {% else %}
+                              <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></li>
+                              <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></li>
+                            {% endif %}
+                            
+                        </ul>
+                        <!-- <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a> -->
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div style="z-index: 100000000;" class="col-md-4 col-sm-4">
+        <div id="google_translate_element"> </div>
+    </div>
+    <!-- ***** Header Area End ***** -->
+
+        <!-- <header class="site-header">
+            <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+                <div class="container">
+                <a class="navbar-brand mr-4" href="/">Django Blog</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+                    <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+                    </div>
+                    Navbar Right Side
+                    {% if user.is_authenticated %}
+                    <div class="navbar-nav">
+                      <a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a>
+
+                        <a class="nav-item nav-link" href="{% url 'post-create' %}">Enter Yourself</a>
+                      <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </div>
+                    {% else %}
+                    <div class="navbar-nav">
+                      <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                      <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                    </div>
+                    {% endif %}
+                </div>
+                </div>
+            </nav>
+        </header> -->
+        <main style="margin-top: 100px;" role="main" class="container">
+            <div class="row">
+              <div class="col-md-8">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% block content %}{% endblock %}
+              </div>
+              <div class="col-md-4">
+                <div >
+                    <h3>Filters Available</h3>
+                    <p class='text-muted'>Choose the option which is most suitable for you</p>
+                    
+                        <div class="dropdown navElements">
+                            <button class="dropbtn">Genre</button>
+                            <div class="dropdown-content">
+                                <a href="/category1/Comedy/">Comedy</a>
+                                <a href="/category1/Action/">Action</a>
+                                <a href="/category1/Horror/">Horror</a>   
+                                <a href="/category1/Adventure/">Adventure</a>
+                                <a href="/category1/Noida/">Noida</a>
+                                <a href="/category1/Chandigarh/">Chandigarh</a>
+                                <a href="/category1/Amritsar/">Amritsar</a>
+                            </div>
+                        </div>
+                        <div style="margin-left: 10px;" class="dropdown navElements">
+                            <button class="dropbtn">Type</button>
+                            <div class="dropdown-content">
+
+                                <a href="/category2/Movies/">Movies</a>
+                                <a href="/category2/TV/">TV Shows</a>
+                        </div>                  
+ 
+                </div>
+                </div>
+        </div>
+            </div>
+        </main> 
+        <script src="../../static/blog/js/jquery-2.1.0.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="../../static/blog/js/popper.js"></script>
+        <script src="../../static/blog/js/bootstrap.min.js"></script>
+    
+        <!-- Plugins -->
+        <script src="../../static/blog/js/owl-carousel.js"></script>
+        <script src="../../static/blog/js/scrollreveal.min.js"></script>
+        <script src="../../static/blog/js/waypoints.min.js"></script>
+        <script src="../../static/blog/js/jquery.counterup.min.js"></script>
+        <script src="../../static/blog/js/imgfix.min.js"></script> 
+        
+        <!-- Global Init -->
+        <script src="../../static/blog/js/custom.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        {% block jquery %}{% endblock %}
+        
+        {% if post_list.has_other_pages %}
+          <nav aria-label="Page navigation conatiner"></nav>
+          <ul class="pagination justify-content-center">
+            {% if post_list.has_previous %}
+            <li><a href="?page={{ post_list.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if post_list.has_next %}
+            <li><a href="?page={{ post_list.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+          {% endif %}
+          </ul>
+          </nav>
+        {% endif %}
+      </body>
+</html>

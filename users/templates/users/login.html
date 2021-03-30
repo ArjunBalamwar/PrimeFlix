@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    button.btn.btn-outline-info {
+      background-color: rgb(63, 171, 243);
+      font-weight: 600;
+      transition: 0.5s;
+  }
+  button.btn.btn-outline-info:hover {
+      background-color: rgb(255, 204, 95);
+      color: black;
+  }
+  </style>
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Log In</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Login</button>
+                   
+                </div>
+            </form>
+            <div class = "border-top pt-3">
+                <small class="text-muted"> Don't have an account? <a class="ml-2" href="{% url 'register' %}">Sign up here</a></small>
+            </div>
+        </div>
+{% endblock content%}
