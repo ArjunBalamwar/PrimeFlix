@@ -26,6 +26,9 @@
             {% endif %} -->
             </div>
             <h2 class="article-title">{{ post.name }}</h2>
+            <video class="embed-responsive embed-responsive-16by9" controls="controls">
+                <source src="{{post.video.url}}" type="video/mp4">
+            </video>
             <p class="article-content">{{ post.content }}</p>
             <br>
             <p class="article-content">Type: {{ post.type }}</p>

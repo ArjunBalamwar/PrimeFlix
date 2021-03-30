@@ -13,7 +13,7 @@ class Like(models.Model):
 
 
 class Post(models.Model):
-
+    video = models.FileField(default = "default.mp4",upload_to="video/%y")
     name = models.CharField(max_length = 100)
     type = models.CharField(max_length = 100, default="Unknown")
     content = models.TextField(default="Unknown")
