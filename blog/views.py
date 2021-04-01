@@ -22,7 +22,7 @@ import nltk
 import numpy as np
 from nltk.corpus import stopwords
 import re
-import string
+import string as strg
 from nltk.stem.porter import PorterStemmer
 from collections import Counter
 
@@ -62,7 +62,6 @@ def home(request):
         form = Search(request.POST)
         if form.is_valid():
             cats = form.cleaned_data.get('search')
-            posts  = search(posts, cats)
             return redirect("home-search", cats)
     else:
         form = Search()
@@ -131,19 +130,11 @@ def about(request):
         
     return render(request, 'blog/about.html')
 
-def vectorize(df_temp, descriptions, titles):
-    tfidf = TfidfVectorizer()
-    tfidf_matrix = tfidf.fit_transform(descriptions)
-    cosine_sim1 = linear_kernel(tfidf_matrix, tfidf_matrix)
-
-    indices = pd.Series(df_temp.index, index = titles)
-    return cosine_sim1, indices, tfidf
-
 def sentence_engineering(string):
     ps = PorterStemmer()
     reverse = ["not", "isn't", "wasn't", "won't", "don't", "n't", "can't", "couldn't", "wouldn't"]
     custom_stop = [word for word in stopwords.words('english') if word not in reverse]  
-    regex = re.compile('[%s]' % re.escape(string.punctuation))
+    regex = re.compile('[%s]' % re.escape(strg.punctuation))
     string = regex.sub('', string).lower().split()
     string = [ps.stem(word) for word in string if word not in custom_stop]
     return ' '.join(string)
@@ -179,6 +170,13 @@ def PostCreateView(request):
         messages.warning(request, f"Only Admins are allowed")
         return redirect("blog-home")
 
+def vectorize(df_temp, descriptions, titles):
+    tfidf = TfidfVectorizer()
+    tfidf_matrix = tfidf.fit_transform(descriptions)
+    cosine_sim1 = linear_kernel(tfidf_matrix, tfidf_matrix)
+
+    indices = pd.Series(df_temp.index, index = titles)
+    return cosine_sim1, indices, tfidf
 
 def get_recommendations(title, indices, cosine_sim):
     df = pd.read_csv("df_pure.csv")
@@ -271,7 +269,7 @@ def PostDetailView(request,pk):
             else:
                 form=PostForm1()
         df_temp = pd.read_csv("df_clean.csv")
-        cosine_sim, indices, tfidf= vectorize(df_temp, df_temp["content"], df_temp["name"])
+        cosine_sim, indices, tfidf= vectorize(df_temp,+df_temp["content"]+" "+df_temp["genres"]+" "+df_temp["country"], df_temp["name"])
         posts = get_recommendations(post.name, indices, cosine_sim)
         return render(request,'blog/post_detail.html', {
             "form": form,
