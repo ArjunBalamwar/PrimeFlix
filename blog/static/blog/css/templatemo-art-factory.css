@@ -230,7 +230,7 @@ a.main-button-slider {
 }
 
 a.main-button-slider:hover {
-  background-color: #0088e8;
+  background-color: #000;
 }
 
 a, li.scroll-to-section {
@@ -241,7 +241,7 @@ a.main-button {
   font-size: 13px;
   border-radius: 20px;
   padding: 12px 20px;
-  background-color: #00b4c6;
+  background-color: #000;
   text-transform: uppercase;
   color: #fff;
   letter-spacing: 0.25px;
@@ -252,7 +252,11 @@ a.main-button {
 }
 
 a.main-button:hover {
-  background-color: #0088e8;
+  background-color: #000;
+}
+
+.body{
+  background-color: #000 ;
 }
 
 button.main-button {
@@ -262,7 +266,7 @@ button.main-button {
   font-size: 13px;
   border-radius: 20px;
   padding: 10px 20px;
-  background-color: #f55858;
+  background-color: #000;
   text-transform: uppercase;
   color: #fff;
   letter-spacing: 0.25px;
@@ -273,7 +277,7 @@ button.main-button {
 }
 
 button.main-button:hover {
-  background-color: #0088e8;
+  background-color: #000;
 }
 
 .section-heading h2 {
@@ -297,30 +301,33 @@ header
 */
 
 .background-header {
-  background-color: #fff;
+  background-color: rgb(19, 19, 19);
   height: 80px !important;
   position: fixed !important;
   top: 0px;
   left: 0px;
   right: 0px;
-  box-shadow: 0px 0px 10px rgb(255, 255, 255) !important;
 }
 
 .background-header .logo,
 .background-header .main-nav .nav li a {
-  color: #fff !important;
+  background-color: rgb(19, 19, 19) !important;
+  color: rgb(160, 0, 0) !important;
 }
 
 .background-header .main-nav .nav > li:hover > a {
-  color: #f55858 !important;
+  background-color: rgb(19, 19, 19) !important;
+   color: rgb(160, 0, 0) !important;
 }
 
 .background-header .main-nav .nav > li > ul > li:hover > a {
-  color: #f55858 !important;
+  background-color: rgb(19, 19, 19) !important;
+   color: rgb(160, 0, 0) !important;
 }
 
 .background-header .nav li a.active {
-  color: #f55858 !important;
+  background-color: rgb(19, 19, 19) !important;
+   color: rgb(160, 0, 0) !important;
 }
 
 .header-area {
@@ -339,6 +346,8 @@ header
 .header-area .main-nav {
   min-height: 80px;
   background: transparent;
+  background-color: rgb(19, 19, 19) !important;
+  color: rgb(160, 0, 0) !important;
 }
 
 .header-area .main-nav .logo {
@@ -353,6 +362,8 @@ header
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+  background-color: rgb(19, 19, 19) !important;
+  color: rgb(160, 0, 0) !important;
 }
 
 .header-area .main-nav .nav {
@@ -366,6 +377,8 @@ header
   transition: all 0.3s ease 0s;
   position: relative;
   z-index: 999;
+  background-color: rgb(19, 19, 19) !important;
+  color: rgb(160, 0, 0) !important;
 }
 
 .header-area .main-nav .nav li {
@@ -391,10 +404,13 @@ header
   line-height: 40px;
   border: transparent;
   letter-spacing: 1px;
+  background-color: rgb(19, 19, 19) !important;
+  color: rgb(160, 0, 0) !important;
 }
 
 .header-area .main-nav .nav li:hover a {
-  color: #f55858;
+  background-color: rgb(19, 19, 19) !important;
+  color: rgb(160, 0, 0) !important;
 }
 
 .header-area .main-nav .nav li.submenu {
@@ -410,10 +426,14 @@ header
   position: absolute;
   right: 18px;
   top: 12px;
+  background-color: rgb(19, 19, 19) !important;
+  color: rgb(160, 0, 0) !important;
 }
 
 .header-area.background-header .main-nav .nav li.submenu:after {
   color: #000;
+  background-color: rgb(19, 19, 19) !important;
+  color: rgb(160, 0, 0) !important;
 }
 
 .header-area .main-nav .nav li.submenu ul {
@@ -954,17 +974,41 @@ services
 }
 
 .service-item {
+  width: 350px;
   cursor: pointer;
   display: block;
-  background: #ffffff;
+  background:  url("../images/VImage4.jpg") !important;
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.1);
-  padding: 40px 30px;
+  padding: 40px 20px;
+  border-radius: 15px;
   text-align: center;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
   position: relative;
+  margin-right: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: -5px;
+}
+p.article-content {
+  color: white !important;
+  font-size: 15px  !important;
+}
+a.main-button {
+  background-color: #000000;
+  color: red !important;
+  border: solid 1px rgb(41, 39, 39);
+}
+a.main-button:hover{
+  background-color: #000000  !important;
+  color: rgb(255, 255, 255) !important;
+  border: solid 1px rgb(41, 39, 39);
+}
+
+a.mr-2 {
+  color: white !important;
 }
 
 @media screen and (max-width: 920px) {
@@ -975,7 +1019,7 @@ services
 
 .service-item:hover .icon,
 .service-item:hover a.main-button {
-  background-color: #0088e8;
+  background-color: #000;
 }
 
 .service-item .icon h1{
@@ -1312,6 +1356,7 @@ contact
   color: #fff;
 }
 
+
 /* 
 ---------------------------------------------
 footer
@@ -1415,6 +1460,7 @@ preloader
   -webkit-animation: jumper 1s 0s linear infinite;
   animation: jumper 1s 0s linear infinite;
 }
+
 
 #preloader .jumper > div:nth-child(2) {
   -webkit-animation-delay: 0.33333s;

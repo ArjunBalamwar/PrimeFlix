@@ -33,7 +33,7 @@ def search(posts, name):
     category_posts = []
     for post in posts:
         for string in strings:
-            if string in post.name.lower():
+            if string in post.name.lower()+" "+ post.cast.lower() + " "+ post.country.lower()+" "+ post.genres.lower()+" "+ post.type.lower():
                 category_posts.append(post)
     
     result = [item for items, c in Counter(category_posts).most_common()
@@ -55,7 +55,7 @@ def search(posts, name):
 def mainHome(request):
     return render(request, 'blog/index.html',)
 
-@login_required
+
 def home(request):
     posts = Post.objects.all().order_by("-likes")
     if request.method== 'POST':
@@ -229,16 +229,19 @@ def PostDetailView(request,pk):
                     if l_bool:
                         post.likes -= 1
                         likes.delete()
+                        message = f"{post.name} disliked"
                     else:
                         post.likes += 1
                         like = Like()
                         like.name = post.name
                         like.user = request.user
                         like.save()
+                        message = f"{post.name} liked"
                     post.save()
                 else:
                     if w_bool:
                         wl.delete()
+                        message = f"{post.name} removed from your watch list"
                     else:
                         model = WatchLater()
                         model.user = request.user
@@ -253,7 +256,9 @@ def PostDetailView(request,pk):
                         model.release_date = post.release_date
                         model.likes = post.likes
                         model.save()
-                return redirect('blog-home')          
+                        message = f"{post.name} added to your watch list"
+                messages.success(request, message)
+                return redirect('post-detail', pk)          
     else:
         if w_bool:
             if l_bool:
@@ -296,20 +301,30 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 def watchLater(request):
-    posts = WatchLater.objects.filter(user = request.user)
-    paginator = Paginator(posts, 10)
-    page = request.GET.get('page')
-    try:
-        post_list = paginator.page(page)
-    except PageNotAnInteger:
-        post_list = paginator.page(1)
-    except EmptyPage:
-        post_list = paginator.page(paginator.num_pages)
-    if request.method != 'POST':
-        context={
-            'page': page,
-            'post_list': post_list,
-        }
+    posts1 = WatchLater.objects.filter(user = request.user)
+    posts2 = Like.objects.filter(user = request.user)
+    liked_post = []
+    for post in posts2:
+        post2 = Post.objects.filter(name = post.name).first()
+        liked_post.append(post2)
+    watch_later = []
+    for post in posts1:
+        post2 = Post.objects.filter(name = post.name).first()
+        watch_later.append(post2)
+
+    # paginator = Paginator(posts, 10)
+    # page = request.GET.get('page')
+    # try:
+    #     post_list = paginator.page(page)
+    # except PageNotAnInteger:
+    #     post_list = paginator.page(1)
+    # except EmptyPage:
+    #     post_list = paginator.page(paginator.num_pages)
+    # if request.method != 'POST':
+    context={
+        'watch_later': watch_later,
+        'liked_posts': liked_post
+    }
     return render(request, 'blog/dashboard.html',context)
 
 def FilteredGenreView(request, cats):

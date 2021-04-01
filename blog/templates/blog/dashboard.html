@@ -1,8 +1,24 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    
+
+<legend>Watch Later</legend>
 <div class="col-md-12" style="display: grid; grid-template-columns: auto auto;"  class="container">
-    {% for post in post_list %}
+    {% for post in watch_later %}
+        <div class=" item service-item">
+            <div class="icon">
+            </div>
+            <h5 class="service-title"><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.name }}</a></h5>
+            <!-- <p>{{ post.content }}</p> -->
+            <p class="article-content">Type: {{ post.type }}</p>
+            <p class="article-content">Genres: {{ post.genres }}</p>
+            <a href="{% url 'post-detail' post.id %}" class="main-button">Watch</a>
+        </div>
+    {% endfor %}
+</div>
+<legend>Liked Posts</legend>
+<div class="col-md-12" style="display: grid; grid-template-columns: auto auto;"  class="container">
+
+    {% for post in liked_posts %}
         <div class=" item service-item">
             <div class="icon">
                 <!-- <h1 style="font-weight: 700; padding-top: 15px;">{{ post.name }}</h1> -->

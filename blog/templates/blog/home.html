@@ -1,8 +1,25 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
+<style>
+    .item .service-item{
+    margin-top: 5px !important;
+  }
+  .make_grey{
+    background-color: #131313  !important;
+    }
+    .content-section.make_grey {
+        background-color: #131313  !important;
+}
+h3 {
+    color: rgb(204, 204, 204) !important;
+}
+a.mr-2.active {
+  color: white !important;
+}
+</style>
 {% block content %}
 {% if search_form %}
-    <div class="content-section">
+    <div class="content-section make_grey">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
@@ -22,7 +39,7 @@
         <div class=" item service-item">
             <div class="icon">
             </div>
-            <h5 class="service-title"><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.name }}</a></h5>
+            <h5  class="service-title"><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.name }}</a></h5>
             <p class="article-content">Type: {{ post.type }}</p>
             <p class="article-content">Genres: {{ post.genres }}</p>
             <a href="{% url 'post-detail' post.id %}" class="main-button">Watch</a>

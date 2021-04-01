@@ -11,13 +11,51 @@
       background-color: rgb(255, 204, 95);
       color: black;
   }
+  /* .embed-responsive{
+      margin-top: 10px;
+      width: 90%;
+  }
+  .mr-2{
+      width: 900px;
+  }
+  .media .content-section{
+      width: 900px !important;
+  } */
+  .article-content{
+      color:white !important;
+      width: 90%;
+  }
+  .desc{
+      padding-top: 20px;
+  }
+  .article-title{
+      padding-bottom: 10px;
+  }
+  a.mr-2 {
+  color: #aaaaaa !important;
+}
+h2.article-title {
+    color: white;
+}
+.make_short{
+    width: 200px;
+}
+  /*
+  .form-group{
+      width: 90%;
+  }
+  .col-md-12{
+      width: 90% !important;
+  }
+  .item .service-item{
+      margin-left: 0px !important;
+  } */
   </style>
     <article class="media content-section">
         <img  src="{{ post.author.profile.image.url }}">
         <div class="media-body">
             <div class="article-metadata">
             <a class="mr-2" href="#">{{ post.director }}</a>
-            <small class="text-muted">{{ post.release_date|date:"F d, Y" }}</small>
             <!-- {% if user.is_superuser %}
                 <div>
                     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Update</a>
@@ -29,7 +67,7 @@
             <video class="embed-responsive embed-responsive-16by9" controls="controls">
                 <source src="{{post.video.url}}" type="video/mp4">
             </video>
-            <p class="article-content">{{ post.content }}</p>
+            <p class="article-content desc">{{ post.content }}</p>
             <br>
             <p class="article-content">Type: {{ post.type }}</p>
             <p class="article-content">Rating: {{ post.rating }}</p>
@@ -40,14 +78,15 @@
             <p class="article-content">Likes: {{ post.likes }}</p> 
             <form method="POST">
                 {% csrf_token %}
-                <fieldset class="form-group">
+                <fieldset class="form-group make_short">
                     {{ form|crispy }}
                 </fieldset>
                 <div class="form-group">
                     <button class="btn btn-outline-info" type="submit">Select</button>
                 </div>
             </form>
-
+        </div> 
+    </article>
 
             <div class="col-md-12" style="display: grid; grid-template-columns: auto auto;"  class="container">
                 {% for post in posts %}
@@ -61,8 +100,5 @@
                     </div>
                 {% endfor %}
             </div>
-            
-        </div> 
-        
-    </article>
+
 {% endblock content%}
