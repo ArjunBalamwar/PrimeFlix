@@ -33,7 +33,8 @@ def search(posts, name):
     category_posts = []
     for post in posts:
         for string in strings:
-            if string in post.name.lower()+" "+ post.cast.lower() + " "+ post.country.lower()+" "+ post.genres.lower()+" "+ post.type.lower():
+            data = post.name+" "+ post.cast + " "+ post.country+" "+ post.genres+" "+ post.type
+            if string in data.lower().split():
                 category_posts.append(post)
     
     result = [item for items, c in Counter(category_posts).most_common()
@@ -73,12 +74,11 @@ def home(request):
         post_list = paginator.page(1)
     except EmptyPage:
         post_list = paginator.page(paginator.num_pages)
-    if request.method != 'POST':
-        context={
-            'page': page,
-            'post_list': post_list,
-            'search_form': form,
-        }
+    context={
+        'page': page,
+        'post_list': post_list,
+        'search_form': form,
+    }
     return render(request, 'blog/home.html', context)
 
 def home_search(request, cats):
@@ -87,7 +87,6 @@ def home_search(request, cats):
         form = Search(request.POST)
         if form.is_valid():
             cats = form.cleaned_data.get('search')
-            posts  = search(posts, cats)
             return redirect("home-search", cats)
     else:
         form = Search()
@@ -104,7 +103,6 @@ def home_search(request, cats):
         'page': page,
         'post_list': post_list,
         'search_form': form,
-        'cats': cats
     }
     return render(request, 'blog/home.html', context)
 
@@ -183,14 +181,13 @@ def get_recommendations(title, indices, cosine_sim):
     idx = indices[title]
     
     sim_scores = list(enumerate(cosine_sim[idx]))
-    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)[0:11]
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)[1:11]
     
     movie_indices = [i[0] for i in sim_scores]
     posts = []
     for name in df['name'].iloc[movie_indices]:
         posts.append(Post.objects.filter(name=name).first())
-    
-    return posts[1:]
+    return posts
 
 @login_required
 def PostDetailView(request,pk):
@@ -223,7 +220,6 @@ def PostDetailView(request,pk):
                 ch = form.cleaned_data.get('choice')
 
                 if ch == '1':
-                    print('================', l_bool)
                     if l_bool:
                         post.likes -= 1
                         likes.delete()
@@ -326,13 +322,19 @@ def watchLater(request):
     return render(request, 'blog/dashboard.html',context)
 
 def FilteredGenreView(request, cats):
-    df = pd.read_csv("df_pure.csv")
     category_posts = []
     posts = Post.objects.all()
     for post in posts:
-       genres = post.genres.split()
-       if cats in genres:
+        genres = post.genres.split()
+        if cats in genres:
            category_posts.append(post)
+    if request.method== 'POST':
+        form = Search(request.POST)
+        if form.is_valid():
+            cat = form.cleaned_data.get('search')
+            return redirect("cat-search-genre", cats, cat)
+    else:
+        form = Search()
     paginator = Paginator(category_posts, 10)
     page = request.GET.get('page')
     try:
@@ -344,10 +346,32 @@ def FilteredGenreView(request, cats):
     context={
         'page': page,
         'post_list': post_list,
-        'cats': cats
+        'search_form': form,
     }
+    return render(request, 'blog/home.html', context)
 
-    return render(request, 'blog/categories.html', context)
+# def FilteredGenreView(request, cats):
+#     category_posts = []
+#     posts = Post.objects.all()
+#     for post in posts:
+#        genres = post.genres.split()
+#        if cats in genres:
+#            category_posts.append(post)
+#     paginator = Paginator(category_posts, 10)
+#     page = request.GET.get('page')
+#     try:
+#         post_list = paginator.page(page)
+#     except PageNotAnInteger:
+#         post_list = paginator.page(1)
+#     except EmptyPage:
+#         post_list = paginator.page(paginator.num_pages)
+#     context={
+#         'page': page,
+#         'post_list': post_list,
+#         'cats': cats
+#     }
+
+#     return render(request, 'blog/categories.html', context)
 
 
 def FilteredTypeView(request, cats):
@@ -369,5 +393,34 @@ def FilteredTypeView(request, cats):
         'post_list': post_list,
         'cats': cats
     }
-
     return render(request, 'blog/categories.html', context)
+
+def cat_search_genre(request, cats, cat):
+    category_posts = []
+    posts = Post.objects.all()
+    for post in posts:
+        genres = post.genres.split()
+        if cats in genres:
+           category_posts.append(post)
+    if request.method== 'POST':
+        form = Search(request.POST)
+        if form.is_valid():
+            cat = form.cleaned_data.get('search')
+            return redirect("cat-search-genre", cats, cat)
+    else:
+        form = Search()
+    category_posts  = search(category_posts, cat)
+    paginator = Paginator(category_posts, 10)
+    page = request.GET.get('page')
+    try:
+        post_list = paginator.page(page)
+    except PageNotAnInteger:
+        post_list = paginator.page(1)
+    except EmptyPage:
+        post_list = paginator.page(paginator.num_pages)
+    context={
+        'page': page,
+        'post_list': post_list,
+        'search_form': form,
+    }
+    return render(request, 'blog/home.html', context)

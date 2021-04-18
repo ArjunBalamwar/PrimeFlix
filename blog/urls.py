@@ -38,6 +38,8 @@ urlpatterns = [
     path('category1/<str:cats>/', views.FilteredGenreView, name='category1'),
     path('category2/<str:cats>/', views.FilteredTypeView, name='category2'),
     path('search/<str:cats>/', views.home_search, name="home-search"),
+    path('category1/<str:cats>/<str:cat>/', views.cat_search_genre, name="cat-search-genre"),
+    # path('category2/<str:cats>/<str:cat>/', views.home_search, name="cat-search2"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -39,11 +39,21 @@ a.mr-2.active {
         <div class=" item service-item">
             <div class="icon">
             </div>
-            <h5  class="service-title"><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.name }}</a></h5>
+            <h5  class="service-title"><a class="article-title">{{ post.name }}</a></h5>
             <p class="article-content">Type: {{ post.type }}</p>
             <p class="article-content">Genres: {{ post.genres }}</p>
             <a href="{% url 'post-detail' post.id %}" class="main-button">Watch</a>
         </div>
+        <!-- <div class="scrollmenu">
+            <div class="item service-item">
+                <div class="icon">
+                </div>
+                <h5  class="service-title"><a class="article-title">{{ post.name }}</a></h5>
+                <p class="article-content">Type: {{ post.type }}</p>
+                <p class="article-content">Genres: {{ post.genres }}</p>
+                <a href="{% url 'post-detail' post.id %}" class="main-button">Watch</a>
+            </div>
+        </div> -->
     {% endfor %}
 </div>
 

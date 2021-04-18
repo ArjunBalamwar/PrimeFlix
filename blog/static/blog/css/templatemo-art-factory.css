@@ -977,7 +977,8 @@ services
   width: 350px;
   cursor: pointer;
   display: block;
-  background:  url("../images/VImage4.jpg") !important;
+  background:  url("../images/VImage5.jpg") no-repeat center center !important;
+  background-size: cover !important;
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.1);
   padding: 40px 20px;
   border-radius: 15px;
