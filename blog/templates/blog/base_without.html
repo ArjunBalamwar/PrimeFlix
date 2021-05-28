@@ -6,6 +6,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- <script id="gs-sdk" src='//www.buildquickbots.com/botwidget/v3/demo/static/js/sdk.js?v=3' key="2de8d293-c16d-42e5-ab6e-28caf5b424e7" ></script> -->
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../../static/blog/css/bootstrap.min.css">
@@ -15,73 +16,176 @@
 
         <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-        <script
+        <!-- <script
         type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-      ></script>
-      <style>
-        body{
-        background-color: black;
-       }
-       html {
-    background-color: black;
-}
-        header.header-area.header-sticky {
-    background-color: #131313;
-    height: 30px ;
-}
-a.nav-item.nav-link {
-    font-size: 16px !important;
-}
-a{
-  font-size: 20px;
-  color:white !important;
-}
-      </style>
-      <!-- <script type="text/javascript">
+      ></script> -->
+      <script type="text/javascript">
         function googleTranslateElementInit() {
           new google.translate.TranslateElement(
             { pageLanguage: "en" },
             "google_translate_element"
           );
         }
-      </script> -->
+      </script>
+            
         <title>PrimeFlix</title>
     </head>
-    <body>
+    <body background="#003 !important">
+      <style>
+       body{
+        background-color: black;
+       }
+       html {
+    background-color: black;
+}
+        .goog-logo-link img {
+display: none;
+}
+    
+    .dropbtn {
+        background-color: rgb(160, 0, 0);
+color: white;
+padding: 16px;
+font-size: 16px;
+border: none;
+transition: all 0.3s;
+padding-left: 23x;
+padding-right: 23px;
+height: 100%;
+margin-top: 0;
+margin-bottom: 0;
+font-size: 20px;
+font-weight: 700;
+line-height: 20px;
+border-radius: 20px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #aaaaaa;
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+border-radius: 20px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #e2e2e2;
+  border-radius: 20px;
+
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+background-color: #ffffff;
+color: rgb(160, 0, 0);
+}
+
+.navElements {
+float: left;
+}
+.dropbtn{
+padding-left: 23x;
+padding-right: 23px;
+height: 100%;
+margin-top: 15px;
+margin-bottom: 0;
+font-size: 20px;
+font-weight: 700;
+line-height: 20px;
+}
+header.header-area.header-sticky {
+  background: rgb(19, 19, 19) !important;
+  height: 30px !important;
+}
+a.nav-item.nav-link {
+    font-size: 16px !important;
+}
+a.logo {
+    margin:0;
+    margin-left: 30px  !important;
+}
+.col-md-4{
+  padding-left: 20px;
+}
+a.mr-2.active {
+  color: white !important;
+}
+a.page-link {
+    background-color: #131313;
+    margin-left: 25px;
+    margin-top: 10px !important;
+    margin-bottom: 30px !important;
+    color: red !important;
+    padding: 10px;
+    border-radius: 20px;
+    border: solid 1px grey;
+}
+a.page-link:hover {
+  color:white !important;
+  background-color: #131313;
+  border:solid 1px rgb(73, 73, 73);
+}
+a.ml-2 {
+    color: white !important;
+}
+
+</style>
       <header class="header-area header-sticky">
         <div class="container">
+            
             <div class="row">
                 <div class="col-12">
-                  
                     <nav class="main-nav">
                         <!-- ** Logo Start ** -->
                         <a href="/" class="logo">PrimeFlix</a>
-      
-
                         <!-- ** Logo End ** -->
                         <!-- ** Menu Start ** -->
+                        
                         <ul class="nav">
                             <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a></li>
                             <!-- <li class="scroll-to-section"><a href="#frequently-question">Frequently Questions</a></li> -->
                             {% if user.is_authenticated %}
                             
                             <!-- <li class="submenu">
-                              <a href="javascript:;">Activities</a>
+                                <li class="scroll-to-section"><a href="javascript:;">Activities</a></li>
                               <ul> -->
-                                  <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a></li>
-                                  {% if user.is_superuser %}
+                                <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a></li>
+                                {% if user.is_superuser %}
                                     <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'post-create' %}">Add Post</a></li>
-                                  {% endif %}
+                                {% endif %}
                               <!-- </ul>
                             </li> -->
-                      <!-- <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a></li>
-                      <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'post-create' %}">Enter Yourself</a></li> -->
-                      <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
-                    {% else %}
-                      <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></li>
-                      <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></li>
-                    {% endif %}
+                              <!-- <li class="scroll-to-section"><a  href="{% url 'dash-view' %}">Dashboard</a></li>
+                              <li class="scroll-to-section"><a  href="{% url 'post-create' %}">Enter Yourself</a></li> -->
+                              <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
+                            {% else %}
+                              <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></li>
+                              <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></li>
+                            {% endif %}
                             
                         </ul>
                         <!-- <a class='menu-trigger'>
@@ -94,57 +198,25 @@ a{
         </div>
     </header>
     <div style="z-index: 100000000;" class="col-md-4 col-sm-4">
-      <div id="google_translate_element"> </div>
-  </div>
-    <!-- ** Header Area End ** -->
-
-        <!-- <header class="site-header">
-            <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-                <div class="container">
-                <a class="navbar-brand mr-4" href="/">Django Blog</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggle">
-                    <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
-                    <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
-                    </div>
-                    Navbar Right Side
-                    {% if user.is_authenticated %}
-                    <div class="navbar-nav">
-                      <a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a>
-
-                        <a class="nav-item nav-link" href="{% url 'post-create' %}">Enter Yourself</a>
-                      <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
-                    </div>
-                    {% else %}
-                    <div class="navbar-nav">
-                      <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                      <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
-                    </div>
-                    {% endif %}
-                </div>
-                </div>
-            </nav>
-        </header> -->
-        <main role="main" class="container">
-            <div class="row">
-              <div class="col-md-12">
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{message.tags}}">
-                            {{message}}
-                        </div>
-                    {% endfor %}
-                {% endif %}
-              </div>
-              
+        <div id="google_translate_element"> </div>
+    </div>
+   
+        <main style="margin-top: 100px;" role="main" class="container">
+          <div class="row">
+            <div class="col-md-8">
+              {% if messages %}
+                  {% for message in messages %}
+                      <div class="alert alert-{{message.tags}}">
+                          {{message}}
+                      </div>
+                  {% endfor %}
+              {% endif %}
             </div>
+              {% block content %}{% endblock %}
+            
+            
+          </div>
         </main> 
-        
-        {% block content %}{% endblock %}
-
         <script src="../../static/blog/js/jquery-2.1.0.min.js"></script>
 
         <!-- Bootstrap -->
@@ -165,6 +237,18 @@ a{
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         {% block jquery %}{% endblock %}
-    
+        
+        {% if post_list.has_other_pages %}
+          <nav aria-label="Page navigation conatiner"></nav>
+          <ul class="pagination justify-content-center">
+            {% if post_list.has_previous %}
+            <li><a href="?page={{ post_list.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if post_list.has_next %}
+            <li><a href="?page={{ post_list.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+          {% endif %}
+          </ul>
+          </nav>
+        {% endif %}
       </body>
 </html>

@@ -2,17 +2,60 @@ from django import forms
 from django.db.models import fields
 from .models import Post
 
-PREGNANT=[('Yes', 'Yes'), ('No', 'No')]
-WEIGHT = [('light', 'till 30'), ('medium', 'from 30 to 70'), ('heavy', "above 70")]
-GENDER = [('Male', 'Male'),('Female', 'Female'), ('Other', 'Other')]
-CITY = [('Mumbai', 'Mumbai'), ('Pune', 'Pune'), ('Nagpur', 'Nagpur'), ('Delhi', 'Delhi'), ('Noida', 'Noida'), ('Chandigarh', 'Chandigarh'), ('Amritsar', 'Amritsar')]
-BOOKING = [(1, 'Allow Covid Bed Registration'),(2, 'Allow Bed Registration'), (3, 'Delete Entry')]
-SCHEME = [('Life Insurance', 'Life Insurance'), ('Govt. Scheme','Govt. Scheme'), ('MSME Loan','MSME Loan')]
-AREA =[('Andheri','Andheri'),('Worli','Worli'),('Bandra','Bandra'),('Breach Candy','Breach Candy'),('Thane','Thane'),('Ghatkopar','Ghatkopar'),('Friends Colony','Friends Colony'),('Hinjawadi','Hinjwadi'),('Chandini Chowk','Chandani Chowk')]
+POST_TYPE =[('Movie','Movie'), ('TV Show','TV Show')]
+GENRES = [
+    ('Action', 'Action'), 
+    ('Adventure,', 'Adventure,'), 
+    ('Sci-Fi', 'Sci-Fi'), 
+    ('Fantasy', 'Fantasy'), 
+    ('International', 'International'), 
+    ('Dramas', 'Dramas'), 
+    ('Independent', 'Independent'), 
+    ('Children', 'Children'), 
+    ('Family', 'Family'), 
+    ('Classic', 'Classic'), 
+    ('Sports', 'Sports'), 
+    ('Romantic', 'Romantic'), 
+    ('Horror', 'Horror'), 
+    ('Thrillers', 'Thrillers'), 
+    ('Music', 'Music'), 
+    ('Musicals', 'Musicals'), 
+    ('Faith', 'Faith'), 
+    ('Spirituality', 'Spirituality'), 
+    ('LGBTQ', 'LGBTQ'), 
+    ('Documentaries', 'Documentaries'), 
+    ('Anime', 'Anime'), 
+    ('Features,', 'Features,'), 
+    ('Stand-Up', 'Stand-Up'), 
+    ('Comedy', 'Comedy'), 
+    ('Crime', 'Crime'), 
+    ('Shows,', 'Shows,'),
+    ('Adventure', 'Adventure'), 
+    ('British', 'British'), 
+    ('Musicals,', 'Musicals,'), 
+    ('Cult', 'Cult'), 
+    ('Korean', 'Korean'), 
+    ('Features', 'Features'),
+    ('Docuseries,', 'Docuseries,'), 
+    ('Reality', 'Reality'), 
+    ('Series,', 'Series,'), 
+    ('Fantasy,', 'Fantasy,'), 
+    ('Docuseries', 'Docuseries'), 
+    ('Spanish-Language', 'Spanish-Language'), 
+    ("Kids'", "Kids'"), 
+    ('Talk', 'Talk'), 
+    ('Spirituality,', 'Spirituality,'), 
+    ('Mysteries,', 'Mysteries,'), 
+    ('Science', 'Science'), 
+    ('Nature', 'Nature'), 
+    ('Teen', 'Teen')
+]
+RATINGS = [('PG-13', 'PG-13'), ('TV-MA', 'TV-MA'), ('TV-PG', 'TV-PG'), ('R', 'R'), ('TV-14', 'TV-14'), ('TV-Y', 'TV-Y'), ('NR', 'NR'), ('G', 'G'), ('TV-G', 'TV-G'), ('PG', 'PG'), ('TV-Y7', 'TV-Y7'), ('NC-17', 'NC-17'), ('TV-Y7-FV', 'TV-Y7-FV'), ('UR', 'UR')]
 OPTION1 = [(1, '👍🏼'), (2, '➕')]
 OPTION2 = [(1, '👍🏼'), (2, '➖')]
 OPTION3 = [(1, '👎🏼'), (2, '➕')]
 OPTION4 = [(1, '👎🏼'), (2, '➖')]
+
 # class PostForm(forms.ModelForm):
 #     class Meta:
 #         model = Post
@@ -76,7 +119,12 @@ OPTION4 = [(1, '👎🏼'), (2, '➖')]
 #              'co_mobidity', 'ambulance_required', 'scheme', 'tested','symptoms'
 #         #   'proof',
 #         )
+
 class PostForm(forms.ModelForm):
+    type = forms.CharField(widget=forms.Select(choices=POST_TYPE))
+    genres = forms.MultipleChoiceField(choices = GENRES,  widget=forms.CheckboxSelectMultiple)
+    rating = forms.MultipleChoiceField(choices = RATINGS,  widget=forms.CheckboxSelectMultiple)
+
     class Meta:
         model= Post
         fields = ["name", "type", "genres", "rating", "director", "cast", "country", "duration", "release_date", "likes", "content"]
@@ -106,15 +154,15 @@ class PostForm4(forms.ModelForm):
         model= Post
         fields = ["choice"]
 
-class Booking(forms.ModelForm):
-    choice=forms.CharField(widget=forms.Select(choices=BOOKING))
-    class Meta:
-        model= Post
-        fields = ["choice"]
-
 class Search(forms.ModelForm):
     search=forms.CharField()
     class Meta:
         model= Post
         fields = ["search"]
+
+class PostDeleteForm(forms.ModelForm):
+    class Meta:
+        model= Post
+        fields = []
+        
 

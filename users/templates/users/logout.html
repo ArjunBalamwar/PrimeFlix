@@ -1,10 +1,13 @@
 {% extends 'blog/base_without.html' %}
 {% block content %}
 
+</style>
+    <div class="col-md-8">
         <h2 style= "margin-top:100px">You have been logged out</h2>
             <div class = "border-top pt-3">
                 <small class="text-muted"> 
-                    <a href="{% url 'login' %}">Log in here</a>
+                    <a style="color: aliceblue !important;" href="{% url 'login' %}">Log in here</a>
                 </small>
             </div>
+    </div>
 {% endblock content%}

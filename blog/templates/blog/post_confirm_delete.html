@@ -1,15 +1,65 @@
 {% extends 'blog/base.html' %}
 {% block content %}
+<style>
+    button.btn.btn-outline-info {
+      background-color: rgb(63, 171, 243);
+      font-weight: 600;
+      transition: 0.5s;
+  }
+  button.btn.btn-outline-info:hover {
+      background-color: rgb(255, 204, 95);
+      color: black;
+  }
+  /* .embed-responsive{
+      margin-top: 10px;
+      width: 90%;
+  }
+  .mr-2{
+      width: 900px;
+  }
+  .media .content-section{
+      width: 900px !important;
+  } */
+  .article-content{
+      color:white !important;
+      width: 90%;
+  }
+  .desc{
+      padding-top: 20px;
+  }
+  .article-title{
+      padding-bottom: 10px;
+  }
+  a.mr-2 {
+  color: #aaaaaa !important;
+}
+h2.article-title {
+    color: white;
+}
+.make_short{
+    width: 200px;
+}
+  /*
+  .form-group{
+      width: 90%;
+  }
+  .col-md-12{
+      width: 90% !important;
+  }
+  .item .service-item{
+      margin-left: 0px !important;
+  } */
+  </style>
         <div class="content-section">
             <form method="POST">
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">Delete Post</legend>
-                    <h2>Are you sure you want to delete the post : "{{ object.title }}"</h2>
+                    <h2>Are you sure you want to delete the post : "{{ post.name }}"</h2>
                 </fieldset>
                 <div class="form-group">
                     <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
-                    <a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}">Cancel</a>
+                    <a class="btn btn-outline-secondary" href="{% url 'post-detail' post.id %}">Cancel</a>
                 </div>
             </form>
         </div>

@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 <style>
     .item .service-item{
@@ -33,19 +34,10 @@ a.mr-2.active {
         </form>
     </div>
 {% endif %}
-
-<div class="col-md-12" style="display: grid; grid-template-columns: auto auto;"  class="container">
-    {% for post in post_list %}
-        <div class=" item service-item">
-            <div class="icon">
-            </div>
-            <h5  class="service-title"><a class="article-title">{{ post.name }}</a></h5>
-            <p class="article-content">Type: {{ post.type }}</p>
-            <p class="article-content">Genres: {{ post.genres }}</p>
-            <a href="{% url 'post-detail' post.id %}" class="main-button">Watch</a>
-        </div>
-        <!-- <div class="scrollmenu">
-            <div class="item service-item">
+{% if post_list %}
+    <div class="col-md-12" style="display: grid; grid-template-columns: auto auto;"  class="container">
+        {% for post in post_list %}
+            <div class=" item service-item">
                 <div class="icon">
                 </div>
                 <h5  class="service-title"><a class="article-title">{{ post.name }}</a></h5>
@@ -53,10 +45,20 @@ a.mr-2.active {
                 <p class="article-content">Genres: {{ post.genres }}</p>
                 <a href="{% url 'post-detail' post.id %}" class="main-button">Watch</a>
             </div>
-        </div> -->
-    {% endfor %}
-</div>
+            <!-- <div class="scrollmenu">
+                <div class="item service-item">
+                    <div class="icon">
+                    </div>
+                    <h5  class="service-title"><a class="article-title">{{ post.name }}</a></h5>
+                    <p class="article-content">Type: {{ post.type }}</p>
+                    <p class="article-content">Genres: {{ post.genres }}</p>
+                    <a href="{% url 'post-detail' post.id %}" class="main-button">Watch</a>
+                </div>
+            </div> -->
+        {% endfor %}
+    </div>
+{% else %}
+    <h3>{{ text }}</h3>
+{% endif %}
 
-
-    
 {% endblock content %}
