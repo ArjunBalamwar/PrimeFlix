@@ -106,7 +106,7 @@ def home(request):
         'search_form': form,
         'text': "No Movies And Shows Available",
     }
-    return render(request, 'blog/home.html', context)
+    return render(request, 'blog/index.html', context)
 
 def home_search(request, cats):
     posts = Post.objects.all().order_by("-likes")
@@ -132,7 +132,7 @@ def home_search(request, cats):
         'search_form': form,
         'text': "No Movies And Shows Found",
     }
-    return render(request, 'blog/home.html', context)
+    return render(request, 'blog/index.html', context)
 
 
 
@@ -455,7 +455,7 @@ def FilteredGenreView(request, cats):
         'post_list': post_list,
         'text': "No Movies And Shows Found",
     }
-    return render(request, 'blog/home.html', context)
+    return render(request, 'blog/index.html', context)
 
 def GenreWatchLater(request, cats):
 
@@ -537,7 +537,7 @@ def FilteredTypeView(request, cats):
         'cats': cats,
         'text': "No Movies And Shows Found",
     }
-    return render(request, 'blog/home.html', context)
+    return render(request, 'blog/index.html', context)
 
 def cat_search_genre(request, cats, cat):
     category_posts = []
@@ -567,4 +567,4 @@ def cat_search_genre(request, cats, cat):
         'post_list': post_list,
         'search_form': form,
     }
-    return render(request, 'blog/home.html', context)
+    return render(request, 'blog/index.html', context)
