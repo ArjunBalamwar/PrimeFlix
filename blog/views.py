@@ -24,6 +24,7 @@ from nltk.corpus import stopwords
 import re
 import string as strg
 from nltk.stem.porter import PorterStemmer
+from nltk.stem import WordNetLemmatizer
 from collections import Counter
 import joblib
 
@@ -35,6 +36,30 @@ def sentence_engineering(string):
     string = regex.sub('', string).lower().split()
     string = [ps.stem(word) for word in string if word not in custom_stop]
     return ' '.join(string)
+
+def sentence_engineering(string):
+    wl = WordNetLemmatizer()
+    custom_stop = [word for word in stopwords.words('english') if word not in reverse]  
+#     custom_stop = []
+    regex = re.compile('[%s]' % re.escape(strg.punctuation))
+    string = regex.sub('', string).lower().split()
+    string = [wl.lemmatize(word, pos='v') for word in sentence_engineering_(string)]
+    return ' '.join(string)
+
+def sentence_engineering_(text):
+    tokens_tag = nltk.pos_tag(text)
+    patterns= """NP:{<NN.?>*<VB.?>*<WP.?>*<PRP.?>*<MD.?>*<RB.?>*<WRB.?>*<JJ.?>*<CC>?}"""
+    chunker = nltk.RegexpParser(patterns)
+    output = chunker.parse(tokens_tag)
+    chunked_list = []
+    for elem in output:
+        if isinstance(elem, nltk.Tree):
+            chunked = []
+            for (text, tag) in elem:
+                if text not in ["are", 'am']:
+                    chunked += text.split()
+            chunked_list+= chunked
+    return chunked_list
 
 def sent_eng(string):
     return ' '.join([''.join(i.split(' ')) for i in string.split(',')])  
